@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# QUIZ APP REACTJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+LIVE AT : [https://quiz-app-reactjs.web.app](https://quiz-app-reactjs.web.app/)
 
 ## Available Scripts
 
