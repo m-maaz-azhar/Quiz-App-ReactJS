@@ -1,4 +1,4 @@
-# QUIZ APP REACTJS
+# QUIZ APP WITH REACT.JS
 
 LIVE AT : [https://quiz-app-reactjs.web.app](https://quiz-app-reactjs.web.app/)
 
