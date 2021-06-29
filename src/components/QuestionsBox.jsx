@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import TimeUP from './TimeUP';
 import Countdown from 'react-countdown';
 
 function QuestionsBox() {
-   let questions = require('../data.json');
+
+    const state = useSelector(state => state)
+    let questions = state.question;
+
     const [questionCount, SetQuestionCount] = useState(0)
     const [SelectedValue, SetSelectedValue] = useState("")
     const [QuizScore, SetQuizScore] = useState(0)
@@ -12,9 +16,10 @@ function QuestionsBox() {
     sessionStorage.setItem("NoOfQuestions", questions.length)
 
     let history = useHistory();
+
     let next = () => {
         if (SelectedValue === questions[questionCount].answer) {
-            SetQuizScore(QuizScore + 10);
+            SetQuizScore(10 + QuizScore);
         }
         sessionStorage.setItem("QuizScore", QuizScore)
         if (questionCount === questions.length - 1) {
@@ -22,9 +27,9 @@ function QuestionsBox() {
         }
         else {
             SetQuestionCount(questionCount + 1);
-            console.log(questionCount)
         }
     }
+
     return (
         <div className="wrapper">
             <div className="quiz">
@@ -32,7 +37,7 @@ function QuestionsBox() {
                     <div className="quizUser">
                         <h2 id="greetings">Welcome&nbsp;{sessionStorage.getItem("username")}</h2>
                     </div>
-                    <div style={{marginRight:"20px",color:"white"}}>
+                    <div style={{ marginRight: "20px", color: "white" }}>
                         <Countdown date={Date.now() + 30000}>
                             <TimeUP />
                         </Countdown>
@@ -42,14 +47,12 @@ function QuestionsBox() {
                 <br />
                 <div className="quizBody">
                     <div id="questions">
-
                         <h2>{questions[questionCount].question}</h2>
-
-                        <ul className="optionGroup">
+                        <div className="optionGroup">
                             {questions[questionCount].options.map((option, index) => {
-                                return <li onClick={() => SetSelectedValue(option)} key={index} className="option">{option}</li>
+                                return <div key={index}><input type="radio" id={index} name="option" onClick={() => SetSelectedValue(option)} key={index} className="option" /><label for={index}>{option}</label></div>
                             })}
-                        </ul>
+                        </div>
                     </div>
                     <button className="btnNext" onClick={next}>Next</button>
                 </div>
