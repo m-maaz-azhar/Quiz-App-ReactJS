@@ -16,6 +16,7 @@ function StartQuiz() {
         let username = e.target.value;
         sessionStorage.setItem("username", username);
     }
+
     return (
         <div className="wrapper">
             <div className="welcomeText">
